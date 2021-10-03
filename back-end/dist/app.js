@@ -6,7 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const feed_1 = __importDefault(require("./routes/feed"));
 const app = (0, express_1.default)();
-app.use(feed_1.default);
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+});
+app.use("/data", feed_1.default);
 app.listen(8080, () => {
     console.log("The application is listening on port 8080!");
 });
