@@ -8,4 +8,5 @@ const express_1 = __importDefault(require("express"));
 const feedController = require("../controllers/feed");
 const router = express_1.default.Router();
 router.get("/feed", feedController.getFeed);
+router.post("/todo", feedController.createToDo);
 exports.default = router;

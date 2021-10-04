@@ -1,7 +1,10 @@
 import express from "express";
 import feed from "./routes/feed";
+import bodyParser from "body-parser";
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
