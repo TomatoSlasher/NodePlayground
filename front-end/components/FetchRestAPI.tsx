@@ -1,17 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const FetchRestAPI: React.FC = () => {
+  const [errorMsg, setErrorMsg]: any = useState("");
+
   const [restData, setRestData]: any = useState([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  // useEffect(() => {
-  //   const fetchDataHandler = async () => {
-  //     const fetchRest = await fetch("http://localhost:8080/data/feed");
-  //     const restData = await fetchRest.json();
-  //     console.log(restData);
-  //     setRestData(restData);
-  //   };
-  //   fetchDataHandler();
-  // }, []);
 
   const postTask = async () => {
     const fetchRest = await fetch("http://localhost:8080/data/todo", {
@@ -24,13 +17,20 @@ const FetchRestAPI: React.FC = () => {
         "Content-Type": "application/json",
       },
     });
+    console.log(postTask);
     const restData2 = await fetchRest.json();
+    console.log(restData2);
+    if (restData2.status === 400) {
+      return setErrorMsg(restData2.message);
+    }
     var joined = restData.concat(restData2.post.content);
-    console.log(joined);
     setRestData(joined);
+    setErrorMsg("");
   };
   return (
     <div>
+      {errorMsg && <h1>{errorMsg}</h1>}
+
       <form action="sumbit">
         <input ref={inputRef} placeholder="To-Do" type="text" />
         <button
