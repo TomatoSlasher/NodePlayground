@@ -18,8 +18,5 @@ app.use((req, res, next) => {
 app.use("/data", feed_1.default);
 mongoose_1.default
     .connect("mongodb+srv://tomato:ms4680SXk0j12JG6@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    .then((res) => console.log("Connected to MongoDB"))
+    .then((res) => app.listen(8080))
     .catch((err) => console.log(err));
-app.listen(8080, () => {
-    console.log("The application is listening on port 8080!");
-});
