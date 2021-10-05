@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import { validationResult } from "express-validator/check";
+import { validationResult } from "express-validator";
 exports.getFeed = (req: Request, res: Response, next: NextFunction) => {
   res.status(200).json({ message: "hello tomato" });
 };
