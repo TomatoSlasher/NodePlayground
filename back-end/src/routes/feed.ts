@@ -6,11 +6,11 @@ const imageController = require("../controllers/imageUpload");
 
 const router = express.Router();
 router.get("/feed", feedController.getFeed);
-
+router.post("/image", imageController.createImage);
 router.post(
   "/todo",
   [body("content").trim().isLength({ min: 5 })],
   feedController.createToDo
 );
-router.post("/image", imageController.createImage);
+
 export default router;

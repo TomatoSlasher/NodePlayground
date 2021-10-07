@@ -17,20 +17,15 @@ exports.createToDo = (req, res, next) => {
             errors: error.array(),
         });
     }
-    const imageUrl = req.file.path;
-    console.log(imageUrl);
-    console.log("object");
     const title = req.body.title;
     const content = req.body.content;
     const post = new post_1.default({
         title: title,
         content: content,
-        imageUrl: imageUrl,
     });
     post
         .save()
         .then((result) => {
-        console.log("cretaed");
         res.status(201).json({
             message: "Post created successfully!",
             post: result,
