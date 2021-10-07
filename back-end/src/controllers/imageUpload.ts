@@ -2,10 +2,7 @@ import { NextFunction, Response } from "express";
 import { validationResult } from "express-validator";
 import Post from "../models/post";
 
-exports.getFeed = (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).json({ message: "hello tomato" });
-};
-exports.createToDo = (req: any, res: Response, next: NextFunction) => {
+exports.createImage = (req: any, res: Response, next: NextFunction) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.status(422).json({
@@ -17,11 +14,8 @@ exports.createToDo = (req: any, res: Response, next: NextFunction) => {
   const imageUrl = req.file.path;
   console.log(imageUrl);
   console.log("object");
-  const title = req.body.title;
-  const content = req.body.content;
+
   const post = new Post({
-    title: title,
-    content: content,
     imageUrl: imageUrl,
   });
   post
@@ -29,7 +23,7 @@ exports.createToDo = (req: any, res: Response, next: NextFunction) => {
     .then((result: any) => {
       console.log("cretaed");
       res.status(201).json({
-        message: "Post created successfully!",
+        message: "image created successfully!",
         post: result,
       });
     })
