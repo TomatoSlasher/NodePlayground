@@ -14,10 +14,10 @@ const bodyParser = require("body-parser");
 const app = (0, express_1.default)();
 const fileStorage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "images");
+        cb(null, "./src/images");
     },
     filename: function (req, file, cb) {
-        cb(null, file.fieldname + "-" + Date.now() + path_1.default.extname(file.originalname));
+        cb(null, uuidv4());
     },
 });
 const fileFilter = (req, file, cb) => {

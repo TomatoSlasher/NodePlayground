@@ -1,6 +1,6 @@
 import express from "express";
 // import feedController from "../controllers/feed";
-import { body } from "express-validator/check";
+const { body } = require('express-validator/check');
 const feedController = require("../controllers/feed");
 const imageController = require("../controllers/imageUpload");
 

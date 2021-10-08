@@ -35,7 +35,7 @@ const FetchRestAPI: React.FC = () => {
     formData.append("image", fileImg[0]);
     formData.append('title', 'postData.title');
     formData.append('content', 'postData.content');
-    const fetchRest = await fetch("http://localhost:9000/feed/post", {
+    const fetchRest = await fetch("http://localhost:8080/data/image", {
       method: "POST",
       body: formData,
     });
