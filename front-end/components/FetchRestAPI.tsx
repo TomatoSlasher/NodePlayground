@@ -7,7 +7,7 @@ const FetchRestAPI: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const postTask = async () => {
-    const fetchRest = await fetch("http://localhost:8080/data/todo", {
+    const fetchRest = await fetch("http://localhost:9000/data/todo", {
       method: "POST",
       body: JSON.stringify({
         title: "urgernt",
@@ -18,7 +18,6 @@ const FetchRestAPI: React.FC = () => {
       },
     });
     const restData2 = await fetchRest.json();
-    console.log(restData2);
     if (restData2.status === 400) {
       return setErrorMsg(restData2.message);
     }
@@ -28,16 +27,15 @@ const FetchRestAPI: React.FC = () => {
   };
 
   const handleFileChange = (event: any) => {
-    console.log(event);
     setFile(event.target.files);
   };
-  if (fileImg) {
-    console.log(fileImg);
-  }
+
   const postImage = async () => {
-    const formData = new FormData();
+    const formData: any = new FormData();
     formData.append("image", fileImg[0]);
-    const fetchRest = await fetch("http://localhost:8080/data/todo", {
+    formData.append('title', 'postData.title');
+    formData.append('content', 'postData.content');
+    const fetchRest = await fetch("http://localhost:9000/feed/post", {
       method: "POST",
       body: formData,
     });
@@ -55,7 +53,6 @@ const FetchRestAPI: React.FC = () => {
           postTask();
 
           e.preventDefault();
-          console.log(e);
         }}
       >
         <input ref={inputRef} placeholder="To-Do" type="text" />
@@ -68,6 +65,18 @@ const FetchRestAPI: React.FC = () => {
             return <li key={idx}>{val}</li>;
           })}
       </ul>
+      <form
+        encType="multipart/form-data"
+        action="sumbit"
+        onSubmit={(e) => {
+          postImage();
+
+          e.preventDefault();
+        }}
+      >
+        <input type="file" onChange={handleFileChange} name="image" />
+        <input type="submit" value="Submit" />
+      </form>
     </div>
   );
 };

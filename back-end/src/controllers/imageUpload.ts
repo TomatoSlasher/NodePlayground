@@ -1,21 +1,21 @@
 import { NextFunction, Response } from "express";
-import { validationResult } from "express-validator";
+import { validationResult } from "express-validator/check";
 import Post from "../models/post";
 
 exports.createImage = (req: any, res: Response, next: NextFunction) => {
-  //   const error = validationResult(req);
-  //   if (!error.isEmpty()) {
-  //     return res.status(422).json({
-  //       status: 400,
-  //       message: "failed to fetch data",
-  //       errors: error.array(),
-  //     });
-  //   }
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(422).json({
+        status: 400,
+        message: "failed to fetch data",
+        errors: error.array(),
+      });
+    }
   console.log(req.file);
-  //   const imageUrl = req.file.path;
+    const imageUrl = req.file.path.replace("\\" ,"/");
 
   const post = new Post({
-    imageUrl: " imageUrl",
+    imageUrl: imageUrl,
   });
   post
     .save()

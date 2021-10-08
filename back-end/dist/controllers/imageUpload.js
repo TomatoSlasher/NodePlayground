@@ -14,9 +14,9 @@ exports.createImage = (req, res, next) => {
     //     });
     //   }
     console.log(req.file);
-    //   const imageUrl = req.file.path;
+    const imageUrl = req.file.path;
     const post = new post_1.default({
-        imageUrl: " imageUrl",
+        imageUrl: imageUrl,
     });
     post
         .save()
