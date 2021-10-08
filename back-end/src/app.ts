@@ -11,13 +11,10 @@ const app = express();
 
 const fileStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./src/images");
+    cb(null, "dist/images");
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      uuidv4()
-    );
+    cb(null, uuidv4() + file.originalname);
   },
 });
 const fileFilter = (
