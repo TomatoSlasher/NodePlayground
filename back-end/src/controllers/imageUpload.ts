@@ -3,6 +3,11 @@ const { validationResult } = require("express-validator/check");
 // import Post from "../models/post";
 const Post = require("../models/post");
 
+exports.getImage = async (req: any, res: Response, next: NextFunction) => {
+  const postdata = await Post.find();
+  res.status(200).json(postdata);
+};
+
 exports.createImage = (req: any, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

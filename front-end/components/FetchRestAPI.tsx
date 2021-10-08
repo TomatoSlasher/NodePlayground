@@ -5,10 +5,12 @@ const FetchRestAPI: React.FC = () => {
   const [fileImg, setFile]: any = useState();
   const [restData, setRestData]: any = useState([]);
   const [img, setImg]: any = useState();
+  const [currentImgs, setCurrentImgs]: any = useState();
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const postTask = async () => {
-    const fetchRest = await fetch("http://localhost:9000/data/todo", {
+    const fetchRest = await fetch("http://localhost:8080/data/todo", {
       method: "POST",
       body: JSON.stringify({
         title: "urgernt",
@@ -49,6 +51,15 @@ const FetchRestAPI: React.FC = () => {
     setImg(imageUrl);
   };
 
+  useEffect(() => {
+    const getImage = async () => {
+      const fetchRest = await fetch("http://localhost:8080/data/image");
+      const restData2 = await fetchRest.json();
+      setCurrentImgs(restData2);
+    };
+    getImage();
+  }, [img]);
+
   return (
     <div>
       {errorMsg && <h1>{errorMsg}</h1>}
@@ -83,7 +94,17 @@ const FetchRestAPI: React.FC = () => {
         <input type="file" onChange={handleFileChange} name="image" />
         <input type="submit" value="Submit" />
       </form>
-      {img && <img src={img} alt="" />}
+      {currentImgs &&
+        currentImgs.map((val: any) => {
+          return (
+            <img
+              className="uploaded-img"
+              src={`http://localhost:8080/${val.imageUrl.substring(5)}`}
+              alt=""
+            />
+          );
+        })}
+      {/* {img && <img src={img} alt="" />} */}
     </div>
   );
 };
