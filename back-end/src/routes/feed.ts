@@ -8,7 +8,6 @@ const router = express.Router();
 router.get("/feed", feedController.getFeed);
 router.post("/image", imageController.createImage);
 router.get("/image", imageController.getImage);
-
 router.post(
   "/todo",
   [body("content").trim().isLength({ min: 5 })],

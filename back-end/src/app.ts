@@ -1,6 +1,5 @@
 import express from "express";
 import feed from "./routes/feed";
-// import bodyParser from "body-parser";
 import mongoose, { CallbackWithoutResult } from "mongoose";
 import path from "path";
 import multer from "multer";
@@ -8,7 +7,6 @@ const { v4: uuidv4 } = require("uuid");
 
 const bodyParser = require("body-parser");
 const app = express();
-
 const fileStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "dist/images");
@@ -33,19 +31,7 @@ const fileFilter = (
   }
 };
 app.use(bodyParser.json());
-// app.use(
-//   bodyParser.json({
-//     limit: "50mb",
-//   })
-// );
 
-// app.use(
-//   bodyParser.urlencoded({
-//     limit: "50mb",
-//     parameterLimit: 100000,
-//     extended: true,
-//   })
-// );
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );

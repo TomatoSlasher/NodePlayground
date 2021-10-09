@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const feed_1 = __importDefault(require("./routes/feed"));
-// import bodyParser from "body-parser";
 const mongoose_1 = __importDefault(require("mongoose"));
 const path_1 = __importDefault(require("path"));
 const multer_1 = __importDefault(require("multer"));
@@ -31,18 +30,6 @@ const fileFilter = (req, file, cb) => {
     }
 };
 app.use(bodyParser.json());
-// app.use(
-//   bodyParser.json({
-//     limit: "50mb",
-//   })
-// );
-// app.use(
-//   bodyParser.urlencoded({
-//     limit: "50mb",
-//     parameterLimit: 100000,
-//     extended: true,
-//   })
-// );
 app.use((0, multer_1.default)({ storage: fileStorage, fileFilter: fileFilter }).single("image"));
 app.use("/images", express_1.default.static(path_1.default.join(__dirname, "images")));
 app.use((req, res, next) => {

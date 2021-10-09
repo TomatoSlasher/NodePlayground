@@ -98,13 +98,13 @@ const FetchRestAPI: React.FC = () => {
         currentImgs.map((val: any) => {
           return (
             <img
+              key={val.imageUrl}
               className="uploaded-img"
               src={`http://localhost:8080/${val.imageUrl.substring(5)}`}
               alt=""
             />
           );
         })}
-      {/* {img && <img src={img} alt="" />} */}
     </div>
   );
 };
