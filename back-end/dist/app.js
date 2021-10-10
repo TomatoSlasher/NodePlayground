@@ -38,7 +38,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
 });
-app.use("/data", feed_1.default);
+app.use("/tweet", feed_1.default);
 mongoose_1.default
     .connect("mongodb+srv://tomato:ms4680SXk0j12JG6@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     .then((res) => app.listen(8080))

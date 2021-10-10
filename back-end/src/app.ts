@@ -47,7 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/data", feed);
+app.use("/tweet", feed);
 
 mongoose
   .connect(
