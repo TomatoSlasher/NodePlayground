@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { EventHandler, useEffect, useRef, useState } from "react";
 
 const FetchRestAPI: React.FC = () => {
   const [tweets, setTweets]: any = useState();
@@ -33,11 +33,23 @@ const FetchRestAPI: React.FC = () => {
     setPreviewImage("");
     setPostState(!postState);
   };
+  const deleteTweetHandler = async (e: any) => {
+    e.preventDefault();
+    const formData: any = new FormData();
 
+    formData.append("id", e.target[0].value);
+    const fetchRest = await fetch("http://localhost:8080/tweet/delete", {
+      method: "POST",
+      body: formData,
+    });
+    const restData2 = await fetchRest.json();
+    setPostState(!postState);
+  };
   useEffect(() => {
     const getTweet = async () => {
       const fetchRest = await fetch("http://localhost:8080/tweet/all");
       const restData2 = await fetchRest.json();
+      console.log(restData2);
       setTweets(restData2.reverse());
     };
     getTweet();
@@ -78,7 +90,14 @@ const FetchRestAPI: React.FC = () => {
               tweets.map((val: any, idx: number) => {
                 return (
                   <div key={idx} className="tweet-container">
-                    <p className="tweet-content">{val.content}</p>
+                    <form action="sumbit" onSubmit={deleteTweetHandler}>
+                      <input type="hidden" value={val._id} />
+                      <div className="tweet-header">
+                        <p className="tweet-content">{val.content}</p>
+                        <button type="submit">Delete</button>
+                      </div>
+                    </form>
+
                     <img
                       className="uploaded-img"
                       src={`http://localhost:8080/${val.imageUrl.substring(5)}`}

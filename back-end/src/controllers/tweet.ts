@@ -6,7 +6,11 @@ exports.getTweets = async (req: any, res: Response, next: NextFunction) => {
   const tweetData = await Tweet.find();
   res.status(200).json(tweetData);
 };
-
+exports.deleteTweet = async (req: any, res: Response, next: NextFunction) => {
+  Tweet.findByIdAndDelete(req.body.id)
+    .then((result: any) => res.status(200).json({ message: "Tweet Deleted" }))
+    .catch((err: any) => console.log(err));
+};
 exports.createTweet = (req: any, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

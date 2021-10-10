@@ -32,7 +32,7 @@ label {
 .feed-container {
   border-right: 1px solid grey;
   border-left: 1px solid grey;
-  width: 21rem;
+  width: 40rem;
 
   /* padding: 1rem; */
 }
@@ -42,7 +42,7 @@ label {
   padding: 0.5rem;
 }
 .tweet-box {
-  width: 20rem;
+  width: 39rem;
   height: 5rem;
   background-color: #1b2633;
   margin: 1rem 0rem;
@@ -54,9 +54,6 @@ label {
   border-bottom: 1px solid grey;
   padding: 0.5rem;
 }
-.tweet-content {
-  margin-bottom: 0.5rem;
-}
 
 button,
 .custom-file-upload {
@@ -67,10 +64,14 @@ button,
   border-radius: 20px;
   cursor: pointer;
 }
-.tweet-btn-container {
+.tweet-btn-container,
+.tweet-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.tweet-header {
+  margin-bottom: 1rem;
 }
 input[type="file"] {
   display: none;

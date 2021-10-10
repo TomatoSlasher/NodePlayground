@@ -15,6 +15,11 @@ exports.getTweets = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     const tweetData = yield Tweet.find();
     res.status(200).json(tweetData);
 });
+exports.deleteTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    Tweet.findByIdAndDelete(req.body.id)
+        .then((result) => res.status(200).json({ message: "Tweet Deleted" }))
+        .catch((err) => console.log(err));
+});
 exports.createTweet = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
