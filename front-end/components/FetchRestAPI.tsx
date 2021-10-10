@@ -1,44 +1,55 @@
 import { useEffect, useRef, useState } from "react";
 
 const FetchRestAPI: React.FC = () => {
-  const [fileImg, setFile]: any = useState();
   const [img, setImg]: any = useState();
-  const [currentImgs, setCurrentImgs]: any = useState();
+  const [tweets, setTweets]: any = useState();
+  const [previewImage, setPreviewImage] = useState("");
+  const previewFileChange = async (e: any) => {
+    const formData: any = new FormData();
+    formData.append("image", e.target.files[0]);
 
-  const handleFileChange = (event: any) => {
-    setFile(event.target.files);
+    const fetchRest = await fetch("http://localhost:8080/tweet/img-preview", {
+      method: "POST",
+      body: formData,
+    });
+    const fetchResult: any = await fetchRest.json();
+    const imgPath = `http://localhost:8080/${fetchResult.imageUrl.substring(
+      5
+    )}`;
+    setPreviewImage(imgPath);
   };
 
   const postTweet = async (e: any) => {
     // extract form data
     const formData: any = new FormData(e.target);
-    const formProps = Object.fromEntries(formData);
+    const formProps: any = Object.fromEntries(formData);
     console.log(formProps);
 
     // formData.append("image", fileImg[0]);
     // formData.append("content", "postData.content");
 
-    // const fetchRest = await fetch("http://localhost:8080/data/image", {
-    //   method: "POST",
-    //   body: formData,
-    // });
-    // const restData2 = await fetchRest.json();
-    // const path = restData2.post.imageUrl;
-    // const imageUrl = `http://localhost:8080/${restData2.post.imageUrl.substring(
-    //   5
-    // )}`;
-    // setImg(imageUrl);
+    const fetchRest = await fetch("http://localhost:8080/tweet/create", {
+      method: "POST",
+      body: formProps,
+    });
+    const restData2 = await fetchRest.json();
+    console.log(restData2);
+    const path = restData2.post.imageUrl;
+    const imageUrl = `http://localhost:8080/${restData2.post.imageUrl.substring(
+      5
+    )}`;
+    setImg(imageUrl);
   };
 
-  useEffect(() => {
-    const getTweet = async () => {
-      const fetchRest = await fetch("http://localhost:8080/data/image");
-      const restData2 = await fetchRest.json();
-      console.log(restData2);
-      setCurrentImgs(restData2);
-    };
-    getTweet();
-  }, [img]);
+  // useEffect(() => {
+  //   const getTweet = async () => {
+  //     const fetchRest = await fetch("http://localhost:8080/tweet/all");
+  //     const restData2 = await fetchRest.json();
+  //     console.log(restData2);
+  //     setTweets(restData2);
+  //   };
+  //   getTweet();
+  // }, [img]);
 
   return (
     <div>
@@ -56,17 +67,20 @@ const FetchRestAPI: React.FC = () => {
             <label htmlFor="title">Tweet</label>
             <textarea className="tweet-box" name="content" />
           </div>
+          {previewImage && (
+            <img className="uploaded-img" src={previewImage} alt="" />
+          )}
           <div className="tweet-btn-container">
             <label className="custom-file-upload">
-              <input name="image" type="file" />
+              <input onChange={previewFileChange} name="image" type="file" />
               Upload Image
             </label>
             <button type="submit">Tweet</button>
           </div>
         </div>
       </form>
-      {currentImgs &&
-        currentImgs.map((val: any) => {
+      {tweets &&
+        tweets.map((val: any) => {
           return (
             <img
               key={val.imageUrl}

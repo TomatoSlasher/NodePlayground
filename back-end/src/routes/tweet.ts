@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/create", tweetController.createTweet);
 router.post("/img-preview", tweetController.previewTweetImage);
 
-router.get("/data", tweetController.getTweets);
+router.get("/all", tweetController.getTweets);
 
 // router.post(
 //   "/todo",

@@ -9,7 +9,7 @@ const tweetController = require("../controllers/tweet");
 const router = express_1.default.Router();
 router.post("/create", tweetController.createTweet);
 router.post("/img-preview", tweetController.previewTweetImage);
-router.get("/data", tweetController.getTweets);
+router.get("/all", tweetController.getTweets);
 // router.post(
 //   "/todo",
 //   [body("content").trim().isLength({ min: 5 })],

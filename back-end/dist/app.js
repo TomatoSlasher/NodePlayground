@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const feed_1 = __importDefault(require("./routes/feed"));
+const tweet_1 = __importDefault(require("./routes/tweet"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const path_1 = __importDefault(require("path"));
 const multer_1 = __importDefault(require("multer"));
@@ -38,7 +38,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
 });
-app.use("/tweet", feed_1.default);
+app.use("/tweet", tweet_1.default);
 mongoose_1.default
     .connect("mongodb+srv://tomato:ms4680SXk0j12JG6@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     .then((res) => app.listen(8080))

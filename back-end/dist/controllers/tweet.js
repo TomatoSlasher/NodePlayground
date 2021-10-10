@@ -61,23 +61,27 @@ exports.previewTweetImage = (req, res, next) => {
         throw error;
     }
     const imageUrl = req.file.path.replace("\\", "/");
-    const content = req.body.content;
-    const post = new Tweet({
-        content: content,
+    res.status(200).json({
+        message: "Preview Image",
         imageUrl: imageUrl,
     });
-    post
-        .save()
-        .then((result) => {
-        res.status(201).json({
-            message: "Tweet created successfully!",
-            post: result,
-        });
-    })
-        .catch((err) => {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
-        next(err);
-    });
+    // const content = req.body.content;
+    // const post = new Tweet({
+    //   content: content,
+    //   imageUrl: imageUrl,
+    // });
+    // post
+    //   .save()
+    //   .then((result: any) => {
+    //     res.status(201).json({
+    //       message: "Tweet created successfully!",
+    //       post: result,
+    //     });
+    //   })
+    //   .catch((err: any) => {
+    //     if (!err.statusCode) {
+    //       err.statusCode = 500;
+    //     }
+    //     next(err);
+    //   });
 };
