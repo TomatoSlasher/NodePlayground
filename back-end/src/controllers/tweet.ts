@@ -16,12 +16,11 @@ exports.createTweet = (req: any, res: Response, next: NextFunction) => {
     error.statusCode = 422;
     throw error;
   }
-  if (!req.file) {
-    const error: any = new Error("No image provided.");
-    error.statusCode = 422;
-    throw error;
+
+  let imageUrl = "";
+  if (req.file) {
+    imageUrl = req.file.path.replace("\\", "/");
   }
-  const imageUrl = req.file.path.replace("\\", "/");
   const content = req.body.content;
   const post = new Tweet({
     content: content,
@@ -61,23 +60,4 @@ exports.previewTweetImage = (req: any, res: Response, next: NextFunction) => {
     message: "Preview Image",
     imageUrl: imageUrl,
   });
-  // const content = req.body.content;
-  // const post = new Tweet({
-  //   content: content,
-  //   imageUrl: imageUrl,
-  // });
-  // post
-  //   .save()
-  //   .then((result: any) => {
-  //     res.status(201).json({
-  //       message: "Tweet created successfully!",
-  //       post: result,
-  //     });
-  //   })
-  //   .catch((err: any) => {
-  //     if (!err.statusCode) {
-  //       err.statusCode = 500;
-  //     }
-  //     next(err);
-  //   });
 };
