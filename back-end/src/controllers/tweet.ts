@@ -11,6 +11,11 @@ exports.deleteTweet = async (req: any, res: Response, next: NextFunction) => {
     .then((result: any) => res.status(200).json({ message: "Tweet Deleted" }))
     .catch((err: any) => console.log(err));
 };
+exports.editTweet = async (req: any, res: Response, next: NextFunction) => {
+  Tweet.findByIdAndUpdate(req.body.id, { content: req.body.content })
+    .then((result: any) => res.status(200).json({ message: "Tweet Edited" }))
+    .catch((err: any) => console.log(err));
+};
 exports.createTweet = (req: any, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

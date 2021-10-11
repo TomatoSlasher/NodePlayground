@@ -9,6 +9,7 @@ const tweetController = require("../controllers/tweet");
 const router = express_1.default.Router();
 router.post("/create", tweetController.createTweet);
 router.post("/delete", tweetController.deleteTweet);
+router.post("/edit", tweetController.editTweet);
 router.post("/img-preview", tweetController.previewTweetImage);
 router.get("/all", tweetController.getTweets);
 // router.post(

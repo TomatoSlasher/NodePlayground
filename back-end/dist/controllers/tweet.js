@@ -20,6 +20,11 @@ exports.deleteTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         .then((result) => res.status(200).json({ message: "Tweet Deleted" }))
         .catch((err) => console.log(err));
 });
+exports.editTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    Tweet.findByIdAndUpdate(req.body.id, { content: req.body.content })
+        .then((result) => res.status(200).json({ message: "Tweet Edited" }))
+        .catch((err) => console.log(err));
+});
 exports.createTweet = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

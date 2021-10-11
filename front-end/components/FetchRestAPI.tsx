@@ -4,6 +4,7 @@ const FetchRestAPI: React.FC = () => {
   const [tweets, setTweets]: any = useState();
   const [previewImage, setPreviewImage] = useState("");
   const [postState, setPostState] = useState(false);
+  const [editContent, setEditContent] = useState("");
   const previewFileChange = async (e: any) => {
     const formData: any = new FormData();
     formData.append("image", e.target.files[0]);
@@ -44,6 +45,22 @@ const FetchRestAPI: React.FC = () => {
     });
     const restData2 = await fetchRest.json();
     setPostState(!postState);
+  };
+  const editTweetHandler = async (e: any) => {
+    e.preventDefault();
+    const formData: any = new FormData();
+
+    formData.append("id", e.target[0].value);
+    formData.append("content", e.target[1].value);
+
+    const fetchRest = await fetch("http://localhost:8080/tweet/edit", {
+      method: "POST",
+      body: formData,
+    });
+    const restData2 = await fetchRest.json();
+    console.log(restData2);
+    setPostState(!postState);
+    setEditContent("");
   };
   useEffect(() => {
     const getTweet = async () => {
@@ -90,13 +107,35 @@ const FetchRestAPI: React.FC = () => {
               tweets.map((val: any, idx: number) => {
                 return (
                   <div key={idx} className="tweet-container">
-                    <form action="sumbit" onSubmit={deleteTweetHandler}>
-                      <input type="hidden" value={val._id} />
-                      <div className="tweet-header">
+                    <div className="tweet-header">
+                      {editContent === val._id ? (
+                        <div>
+                          <form action="sumbit" onSubmit={editTweetHandler}>
+                            <input type="hidden" value={val._id} />
+                            <textarea
+                              className="tweet-box edit-box"
+                              name="content"
+                              defaultValue={val.content}
+                            />
+                            <button type="submit">Complete</button>
+                          </form>
+                        </div>
+                      ) : (
                         <p className="tweet-content">{val.content}</p>
-                        <button type="submit">Delete</button>
+                      )}
+                      <div>
+                        <form action="sumbit" onSubmit={deleteTweetHandler}>
+                          <input type="hidden" value={val._id} />
+
+                          <button type="submit">Delete</button>
+                        </form>
+                        <input type="hidden" value={val._id} />
+
+                        <button onClick={() => setEditContent(val._id)}>
+                          Edit
+                        </button>
                       </div>
-                    </form>
+                    </div>
 
                     <img
                       className="uploaded-img"
