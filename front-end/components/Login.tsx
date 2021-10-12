@@ -1,5 +1,5 @@
 const Login = () => {
-  const postSignup = async (e: any) => {
+  const postLogin = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
     formData.append("email", e.target[0].value);
@@ -15,7 +15,7 @@ const Login = () => {
   };
   return (
     <div className="wrapper">
-      <form action="sumbit" onSubmit={postSignup}>
+      <form action="sumbit" onSubmit={postLogin}>
         <label htmlFor="email">Email</label>
         <input type="email" name="email" />
         <label htmlFor="password">Passowrd</label>

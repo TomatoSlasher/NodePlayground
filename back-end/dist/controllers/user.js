@@ -12,6 +12,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // const { validationResult } = require("express-validator/check");
 const express_validator_1 = require("express-validator");
 const User = require("../models/user");
+exports.loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const errors = (0, express_validator_1.validationResult)(req);
+    if (!errors.isEmpty()) {
+        const error = new Error("Validation failed, entered data is incorrect.");
+        error.statusCode = 422;
+        throw error;
+    }
+    const email = req.body.email;
+    const password = req.body.password;
+    const userEmail = yield User.findOne({ email: email });
+    console.log(userEmail);
+    if (!userEmail) {
+        return res.status(200).json({
+            message: "user doesn't exist",
+        });
+    }
+    if (userEmail.email != email || userEmail.password != password) {
+        return res.status(200).json({
+            message: "Invalid E-mail or Password",
+        });
+    }
+    if (userEmail.email == email && userEmail.password == password) {
+        return res.status(200).json({
+            message: "Logged In",
+        });
+    }
+});
 exports.createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
