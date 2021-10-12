@@ -21,6 +21,12 @@ exports.createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     const email = req.body.email;
     const password = req.body.password;
+    const userEmail = yield User.findOne({ email: email });
+    if (userEmail) {
+        return res.status(200).json({
+            message: "user already exists",
+        });
+    }
     const user = new User({
         email: email,
         password: password,

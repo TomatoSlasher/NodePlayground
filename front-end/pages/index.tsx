@@ -8,6 +8,9 @@ const Home: NextPage = () => {
       <Link href="/signup">
         <button>SignUp</button>
       </Link>
+      <Link href="/login">
+        <button>Login</button>
+      </Link>
       <FetchRestAPI />
     </div>
   );

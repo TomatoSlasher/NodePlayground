@@ -12,10 +12,15 @@ exports.createUser = async (req: any, res: Response, next: NextFunction) => {
     error.statusCode = 422;
     throw error;
   }
-
   const email = req.body.email;
   const password = req.body.password;
 
+  const userEmail = await User.findOne({ email: email });
+  if (userEmail) {
+    return res.status(200).json({
+      message: "user already exists",
+    });
+  }
   const user = new User({
     email: email,
     password: password,
