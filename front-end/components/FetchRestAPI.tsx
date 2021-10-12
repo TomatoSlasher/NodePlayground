@@ -1,5 +1,4 @@
 import { EventHandler, useEffect, useRef, useState } from "react";
-
 const FetchRestAPI: React.FC = () => {
   const [tweets, setTweets]: any = useState();
   const [previewImage, setPreviewImage] = useState("");

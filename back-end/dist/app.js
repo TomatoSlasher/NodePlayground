@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const tweet_1 = __importDefault(require("./routes/tweet"));
+const user_1 = __importDefault(require("./routes/user"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const path_1 = __importDefault(require("path"));
 const multer_1 = __importDefault(require("multer"));
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use("/tweet", tweet_1.default);
+app.use("/user", user_1.default);
 mongoose_1.default
     .connect("mongodb+srv://tomato:ms4680SXk0j12JG6@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     .then((res) => app.listen(8080))

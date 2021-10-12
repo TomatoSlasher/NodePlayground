@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const tweetSchema = new Schema(
+const userSchema = new Schema(
   {
-    imageUrl: {
+    email: {
       type: String,
       required: false,
     },
-    content: {
+    passowrd: {
       type: String,
       required: true,
     },
@@ -15,4 +15,4 @@ const tweetSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Tweet", tweetSchema);
+module.exports = mongoose.model("User", userSchema);

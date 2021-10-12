@@ -5,14 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
-const tweetSchema = new Schema({
-    imageUrl: {
+const userSchema = new Schema({
+    email: {
         type: String,
         required: false,
     },
-    content: {
+    passowrd: {
         type: String,
         required: true,
     },
 }, { timestamps: true });
-module.exports = mongoose_1.default.model("Tweet", tweetSchema);
+module.exports = mongoose_1.default.model("User", userSchema);
