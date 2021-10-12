@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { validationResult } = require("express-validator/check");
+const express_validator_1 = require("express-validator");
 const Tweet = require("../models/tweet");
 exports.getTweets = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const tweetData = yield Tweet.find();
@@ -26,7 +26,7 @@ exports.editTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         .catch((err) => console.log(err));
 });
 exports.createTweet = (req, res, next) => {
-    const errors = validationResult(req);
+    const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
         const error = new Error("Validation failed, entered data is incorrect.");
         error.statusCode = 422;
@@ -57,7 +57,7 @@ exports.createTweet = (req, res, next) => {
     });
 };
 exports.previewTweetImage = (req, res, next) => {
-    const errors = validationResult(req);
+    const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
         const error = new Error("Validation failed, entered data is incorrect.");
         error.statusCode = 422;

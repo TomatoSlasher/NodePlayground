@@ -5,9 +5,9 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: false,
+      required: true,
     },
-    passowrd: {
+    password: {
       type: String,
       required: true,
     },

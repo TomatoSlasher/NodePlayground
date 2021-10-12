@@ -1,5 +1,5 @@
 import express from "express";
-const { body } = require("express-validator/check");
+import { validationResult } from "express-validator";
 const tweetController = require("../controllers/tweet");
 
 const router = express.Router();

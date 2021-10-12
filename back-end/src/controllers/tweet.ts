@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-const { validationResult } = require("express-validator/check");
+import { validationResult } from "express-validator";
 const Tweet = require("../models/tweet");
 
 exports.getTweets = async (req: any, res: Response, next: NextFunction) => {

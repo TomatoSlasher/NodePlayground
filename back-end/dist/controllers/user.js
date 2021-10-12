@@ -9,12 +9,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { validationResult } = require("express-validator/check");
+// const { validationResult } = require("express-validator/check");
+const express_validator_1 = require("express-validator");
 const User = require("../models/user");
 exports.createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    //   const tweetData = await Tweet.find();
-    res.status(200).json({
-        message: "user created",
-        res: { email: req.body.email, passowrd: req.body.password },
+    const errors = (0, express_validator_1.validationResult)(req);
+    if (!errors.isEmpty()) {
+        const error = new Error("Validation failed, entered data is incorrect.");
+        error.statusCode = 422;
+        throw error;
+    }
+    const email = req.body.email;
+    const password = req.body.password;
+    const user = new User({
+        email: email,
+        password: password,
+    });
+    user
+        .save()
+        .then(() => {
+        res.status(200).json({
+            message: "user created",
+            res: { email: req.body.email, passowrd: req.body.password },
+        });
+    })
+        .catch((err) => {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
     });
 });
