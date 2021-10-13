@@ -47,16 +47,27 @@ exports.createUser = async (req: any, res: Response, next: NextFunction) => {
       error.statusCode = 422;
       throw error;
     }
+    console.log(req.body);
+    const username = req.body.username;
+    console.log(username);
     const email = req.body.email;
     const password = req.body.password;
     const encryptedPassowrd = await bcrypt.hash(password, 12);
     const userEmail = await User.findOne({ email: email });
+    const userUsername = await User.findOne({ username: username });
+
     if (userEmail) {
       return res.status(200).json({
-        message: "user already exists",
+        message: "user email already exists",
+      });
+    }
+    if (userUsername) {
+      return res.status(200).json({
+        message: "username already exists",
       });
     }
     const user = new User({
+      username: username,
       email: email,
       password: encryptedPassowrd,
     });

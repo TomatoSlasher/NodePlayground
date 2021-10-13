@@ -2,9 +2,11 @@ const Signup = () => {
   const postSignup = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
-    formData.append("email", e.target[0].value);
+    formData.append("username", e.target[0].value);
 
-    formData.append("password", e.target[1].value);
+    formData.append("email", e.target[1].value);
+
+    formData.append("password", e.target[2].value);
 
     const fetchRest = await fetch("http://localhost:8080/user/signup", {
       method: "POST",
@@ -16,6 +18,8 @@ const Signup = () => {
   return (
     <div className="wrapper">
       <form action="sumbit" onSubmit={postSignup}>
+        <label htmlFor="username">Username</label>
+        <input type="text" name="username" />
         <label htmlFor="email">Email</label>
         <input type="email" name="email" />
         <label htmlFor="password">Passowrd</label>
