@@ -47,9 +47,7 @@ exports.createUser = async (req: any, res: Response, next: NextFunction) => {
       error.statusCode = 422;
       throw error;
     }
-    console.log(req.body);
-    const username = req.body.username;
-    console.log(username);
+    const username = req.body.username.toLowerCase().replace(/ /g, "");
     const email = req.body.email;
     const password = req.body.password;
     const encryptedPassowrd = await bcrypt.hash(password, 12);

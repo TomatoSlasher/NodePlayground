@@ -1,6 +1,7 @@
 import express from "express";
 import feed from "./routes/tweet";
 import user from "./routes/user";
+import profile from "./routes/profile";
 
 import mongoose, { CallbackWithoutResult } from "mongoose";
 import path from "path";
@@ -51,6 +52,7 @@ app.use((req, res, next) => {
 
 app.use("/tweet", feed);
 app.use("/user", user);
+app.use("/profile", profile);
 
 mongoose
   .connect(

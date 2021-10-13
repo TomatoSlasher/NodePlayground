@@ -50,9 +50,7 @@ exports.createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             error.statusCode = 422;
             throw error;
         }
-        console.log(req.body);
-        const username = req.body.username;
-        console.log(username);
+        const username = req.body.username.toLowerCase().replace(/ /g, "");
         const email = req.body.email;
         const password = req.body.password;
         const encryptedPassowrd = yield bcrypt.hash(password, 12);
