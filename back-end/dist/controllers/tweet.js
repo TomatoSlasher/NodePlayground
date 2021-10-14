@@ -21,7 +21,11 @@ exports.deleteTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, func
     if (tweet.creator != req.userId) {
         return res.status(200).json({ message: "not authorized to delete" });
     }
-    Tweet.findByIdAndDelete(req.body.id)
+    yield Tweet.findByIdAndDelete(req.body.id);
+    const user = yield User.findById(req.userId);
+    user.tweets.pull(req.body.id);
+    user
+        .save()
         .then((result) => res.status(200).json({ message: "Tweet Deleted" }))
         .catch((err) => console.log(err));
 });

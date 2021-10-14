@@ -12,7 +12,12 @@ exports.deleteTweet = async (req: any, res: Response, next: NextFunction) => {
   if (tweet.creator != req.userId) {
     return res.status(200).json({ message: "not authorized to delete" });
   }
-  Tweet.findByIdAndDelete(req.body.id)
+  await Tweet.findByIdAndDelete(req.body.id);
+
+  const user = await User.findById(req.userId);
+  user.tweets.pull(req.body.id);
+  user
+    .save()
     .then((result: any) => res.status(200).json({ message: "Tweet Deleted" }))
     .catch((err: any) => console.log(err));
 };
