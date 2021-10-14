@@ -17,11 +17,19 @@ exports.getTweets = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     res.status(200).json(tweetData);
 });
 exports.deleteTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const tweet = yield Tweet.findById(req.body.id);
+    if (tweet.creator != req.userId) {
+        return res.status(200).json({ message: "not authorized to delete" });
+    }
     Tweet.findByIdAndDelete(req.body.id)
         .then((result) => res.status(200).json({ message: "Tweet Deleted" }))
         .catch((err) => console.log(err));
 });
 exports.editTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const tweet = yield Tweet.findById(req.body.id);
+    if (tweet.creator != req.userId) {
+        return res.status(200).json({ message: "not authorized to edit" });
+    }
     Tweet.findByIdAndUpdate(req.body.id, { content: req.body.content })
         .then((result) => res.status(200).json({ message: "Tweet Edited" }))
         .catch((err) => console.log(err));

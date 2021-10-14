@@ -1,4 +1,7 @@
+import { useRouter } from "next/router";
+
 const Login = () => {
+  const router = useRouter();
   const postLogin = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
@@ -9,9 +12,14 @@ const Login = () => {
     const fetchRest = await fetch("http://localhost:8080/user/login", {
       method: "POST",
       body: formData,
+      // headers: {
+      //   Auth,
+      // },
     });
     const fetchResult = await fetchRest.json();
     console.log(fetchResult);
+    localStorage.setItem("token", fetchResult.token);
+    router.push("/");
   };
   return (
     <div className="wrapper">

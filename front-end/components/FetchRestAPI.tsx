@@ -20,6 +20,8 @@ const FetchRestAPI: React.FC = () => {
   };
 
   const postTweet = async (e: any) => {
+    const token = localStorage.getItem("token");
+
     const formData: any = new FormData();
     formData.append("image", e.target[1].files[0]);
 
@@ -28,6 +30,9 @@ const FetchRestAPI: React.FC = () => {
     const fetchRest = await fetch("http://localhost:8080/tweet/create", {
       method: "POST",
       body: formData,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     });
     const fetchResult = await fetchRest.json();
     setPreviewImage("");
@@ -36,18 +41,24 @@ const FetchRestAPI: React.FC = () => {
   const deleteTweetHandler = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
+    const token = localStorage.getItem("token");
 
     formData.append("id", e.target[0].value);
     const fetchRest = await fetch("http://localhost:8080/tweet/delete", {
       method: "POST",
       body: formData,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     });
     const restData2 = await fetchRest.json();
+    console.log(restData2);
     setPostState(!postState);
   };
   const editTweetHandler = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
+    const token = localStorage.getItem("token");
 
     formData.append("id", e.target[0].value);
     formData.append("content", e.target[1].value);
@@ -55,17 +66,25 @@ const FetchRestAPI: React.FC = () => {
     const fetchRest = await fetch("http://localhost:8080/tweet/edit", {
       method: "POST",
       body: formData,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     });
     const restData2 = await fetchRest.json();
     console.log(restData2);
+
     setPostState(!postState);
     setEditContent("");
   };
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const getTweet = async () => {
-      const fetchRest = await fetch("http://localhost:8080/tweet/all");
+      const fetchRest = await fetch("http://localhost:8080/tweet/all", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
       const restData2 = await fetchRest.json();
-      console.log(restData2);
       setTweets(restData2.reverse());
     };
     getTweet();

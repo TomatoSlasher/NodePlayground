@@ -1,4 +1,8 @@
+import { useRouter } from "next/router";
+
 const Signup = () => {
+  const router = useRouter();
+
   const postSignup = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
@@ -14,6 +18,7 @@ const Signup = () => {
     });
     const fetchResult = await fetchRest.json();
     console.log(fetchResult);
+    router.push("/login");
   };
   return (
     <div className="wrapper">

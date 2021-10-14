@@ -8,11 +8,19 @@ exports.getTweets = async (req: any, res: Response, next: NextFunction) => {
   res.status(200).json(tweetData);
 };
 exports.deleteTweet = async (req: any, res: Response, next: NextFunction) => {
+  const tweet = await Tweet.findById(req.body.id);
+  if (tweet.creator != req.userId) {
+    return res.status(200).json({ message: "not authorized to delete" });
+  }
   Tweet.findByIdAndDelete(req.body.id)
     .then((result: any) => res.status(200).json({ message: "Tweet Deleted" }))
     .catch((err: any) => console.log(err));
 };
 exports.editTweet = async (req: any, res: Response, next: NextFunction) => {
+  const tweet = await Tweet.findById(req.body.id);
+  if (tweet.creator != req.userId) {
+    return res.status(200).json({ message: "not authorized to edit" });
+  }
   Tweet.findByIdAndUpdate(req.body.id, { content: req.body.content })
     .then((result: any) => res.status(200).json({ message: "Tweet Edited" }))
     .catch((err: any) => console.log(err));
