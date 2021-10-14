@@ -14,5 +14,10 @@ const tweetSchema = new Schema({
         type: String,
         required: true,
     },
+    creator: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
 }, { timestamps: true });
 module.exports = mongoose_1.default.model("Tweet", tweetSchema);

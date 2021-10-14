@@ -1,6 +1,9 @@
 import { NextFunction, Response } from "express";
-// const { validationResult } = require("express-validator/check");
+
 import { validationResult } from "express-validator";
+
+const jwt = require("jsonwebtoken");
+
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
@@ -31,8 +34,17 @@ exports.loginUser = async (req: any, res: Response, next: NextFunction) => {
     });
   }
   if (userEmail.email == email && doMatch) {
+    const token = jwt.sign(
+      {
+        email: userEmail.email,
+        userId: userEmail._id.toString(),
+      },
+      "supersecret",
+      { expiresIn: "1h" }
+    );
     return res.status(200).json({
-      message: "Logged In",
+      token: token,
+      userId: userEmail._id.toString(),
     });
   }
 };

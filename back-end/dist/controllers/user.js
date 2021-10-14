@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// const { validationResult } = require("express-validator/check");
 const express_validator_1 = require("express-validator");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 exports.loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -37,8 +37,13 @@ exports.loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         });
     }
     if (userEmail.email == email && doMatch) {
+        const token = jwt.sign({
+            email: userEmail.email,
+            userId: userEmail._id.toString(),
+        }, "supersecret", { expiresIn: "1h" });
         return res.status(200).json({
-            message: "Logged In",
+            token: token,
+            userId: userEmail._id.toString(),
         });
     }
 });
