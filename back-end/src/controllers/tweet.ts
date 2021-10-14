@@ -1,7 +1,8 @@
 import { NextFunction, Response } from "express";
 import { validationResult } from "express-validator";
+import { createBrotliCompress } from "zlib";
 const Tweet = require("../models/tweet");
-
+const User = require("../models/user");
 exports.getTweets = async (req: any, res: Response, next: NextFunction) => {
   const tweetData = await Tweet.find();
   res.status(200).json(tweetData);
@@ -34,13 +35,21 @@ exports.createTweet = (req: any, res: Response, next: NextFunction) => {
   const post = new Tweet({
     content: content,
     imageUrl: imageUrl,
+    creator: req.userId,
   });
   post
     .save()
     .then((result: any) => {
+      return User.findById(req.userId);
+    })
+    .then((user: any) => {
+      user.tweets.push(post);
+      return user.save();
+    })
+    .then((user: any) => {
       res.status(201).json({
         message: "Tweet created successfully!",
-        post: result,
+        post: post,
       });
     })
     .catch((err: any) => {

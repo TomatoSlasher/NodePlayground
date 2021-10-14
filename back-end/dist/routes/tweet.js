@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const tweetController = require("../controllers/tweet");
 const isAuth = require("../middleware/isAuth");
 const router = express_1.default.Router();
-router.post("/create", tweetController.createTweet);
+router.post("/create", isAuth, tweetController.createTweet);
 router.post("/delete", tweetController.deleteTweet);
 router.post("/edit", tweetController.editTweet);
 router.post("/img-preview", tweetController.previewTweetImage);

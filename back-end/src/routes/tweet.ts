@@ -3,7 +3,7 @@ import { validationResult } from "express-validator";
 const tweetController = require("../controllers/tweet");
 const isAuth = require("../middleware/isAuth");
 const router = express.Router();
-router.post("/create", tweetController.createTweet);
+router.post("/create", isAuth, tweetController.createTweet);
 router.post("/delete", tweetController.deleteTweet);
 router.post("/edit", tweetController.editTweet);
 

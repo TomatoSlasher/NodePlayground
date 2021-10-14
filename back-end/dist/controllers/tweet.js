@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_validator_1 = require("express-validator");
 const Tweet = require("../models/tweet");
+const User = require("../models/user");
 exports.getTweets = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const tweetData = yield Tweet.find();
     res.status(200).json(tweetData);
@@ -40,13 +41,21 @@ exports.createTweet = (req, res, next) => {
     const post = new Tweet({
         content: content,
         imageUrl: imageUrl,
+        creator: req.userId,
     });
     post
         .save()
         .then((result) => {
+        return User.findById(req.userId);
+    })
+        .then((user) => {
+        user.tweets.push(post);
+        return user.save();
+    })
+        .then((user) => {
         res.status(201).json({
             message: "Tweet created successfully!",
-            post: result,
+            post: post,
         });
     })
         .catch((err) => {

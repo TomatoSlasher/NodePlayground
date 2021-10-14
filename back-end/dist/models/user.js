@@ -18,5 +18,11 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    tweets: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Tweet",
+        },
+    ],
 }, { timestamps: true });
 module.exports = mongoose_1.default.model("User", userSchema);
