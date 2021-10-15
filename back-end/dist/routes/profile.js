@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const profileController = require("../controllers/profile");
+const isAuth = require("../middleware/isAuth");
 const router = express_1.default.Router();
-router.get("/feed/:profileName", profileController.getProfile);
+router.get("/view/:profileName", profileController.getProfile);
+router.post("/follow", isAuth, profileController.followProfile);
 exports.default = router;

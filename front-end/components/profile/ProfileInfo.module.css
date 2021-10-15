@@ -1,0 +1,25 @@
+.profile-info-container {
+  border: 1px solid grey;
+  width: 60vw;
+  padding: 1rem;
+}
+
+.profile-img {
+  width: 8rem;
+  border-radius: 100%;
+  border: 2px solid grey;
+}
+.following-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.following {
+  display: flex;
+}
+.following p {
+  padding-right: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+}

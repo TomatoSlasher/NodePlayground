@@ -18,6 +18,18 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    following: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
+    ],
+    followers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
+    ],
     tweets: [
         {
             type: Schema.Types.ObjectId,
