@@ -19,7 +19,6 @@ exports.followProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
         error.statusCode = 422;
         throw error;
     }
-    console.log(req.body.profileId);
     const userDoc = yield User.findById(req.userId);
     userDoc.following.push(req.body.profileId);
     yield userDoc.save();
@@ -28,6 +27,23 @@ exports.followProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     yield profileDoc.save();
     res.status(200).json({
         message: `Profile Followed`,
+    });
+});
+exports.unFollowProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const errors = (0, express_validator_1.validationResult)(req);
+    if (!errors.isEmpty()) {
+        const error = new Error("Validation failed, entered data is incorrect.");
+        error.statusCode = 422;
+        throw error;
+    }
+    const userDoc = yield User.findById(req.userId);
+    userDoc.following.pull(req.body.profileId);
+    yield userDoc.save();
+    const profileDoc = yield User.findById(req.body.profileId);
+    profileDoc.followers.pull(req.userId);
+    yield profileDoc.save();
+    res.status(200).json({
+        message: `Profile Unfollowed`,
     });
 });
 exports.getProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,5 +63,6 @@ exports.getProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     res.status(200).json({
         message: `User ${userData.username}`,
         data: userData,
+        userId: req.userId || "",
     });
 });
