@@ -63,8 +63,8 @@ const Profile: React.FC<{ profile: { data: ProfileType; userId: string } }> = (
         <h2>@{profile.username}</h2>
         <div className={classes["following-container"]}>
           <div className={classes["following"]}>
-            <p>following 0</p>
-            <p>followers 0</p>
+            <p>following {profile.following.length}</p>
+            <p>followers {profile.followers.length}</p>
           </div>
           {isFollower ? (
             <form action="sumbit" onSubmit={profileUnfollowHandler}>
