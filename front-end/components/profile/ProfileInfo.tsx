@@ -26,7 +26,6 @@ const Profile: React.FC<{ profile: { data: ProfileType; userId: string } }> = (
     const formData: any = new FormData();
     formData.append("profileId", e.target[0].value);
 
-    console.log(e.target[0].value);
     const fetchRest = await fetch("http://localhost:8080/profile/follow", {
       method: "POST",
       body: formData,

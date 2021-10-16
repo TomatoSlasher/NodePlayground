@@ -1,6 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const TweetForm = () => {
+const TweetForm: React.FC<{
+  profile: { data: { _id: string }; userId: string };
+}> = (props) => {
+  const [isUserProfile, setIsUserProfile] = useState(false);
+  useEffect(() => {
+    if (props.profile.userId === props.profile.data._id) {
+      setIsUserProfile(true);
+    }
+  }, []);
   const [previewImage, setPreviewImage] = useState("");
   const [postState, setPostState] = useState(false);
 
@@ -39,32 +47,33 @@ const TweetForm = () => {
   };
   return (
     <div>
-      <form
-        action="sumbit"
-        onSubmit={(e) => {
-          postTweet(e);
-          e.preventDefault();
-        }}
-        className="tweet-form"
-      >
-        <div className="post-tweet-container">
-          <div>
-            {" "}
-            <label htmlFor="title">Tweet</label>
-            <textarea className="tweet-box" name="content" />
+      {isUserProfile && (
+        <form
+          action="sumbit"
+          onSubmit={(e) => {
+            postTweet(e);
+            e.preventDefault();
+          }}
+          className="tweet-form"
+        >
+          <div className="post-tweet-container">
+            <div>
+              <label htmlFor="title">Tweet</label>
+              <textarea className="tweet-box" name="content" />
+            </div>
+            {previewImage && (
+              <img className="uploaded-img" src={previewImage} alt="" />
+            )}
+            <div className="tweet-btn-container">
+              <label className="custom-file-upload">
+                <input onChange={previewFileChange} name="image" type="file" />
+                Upload Image
+              </label>
+              <button type="submit">Tweet</button>
+            </div>
           </div>
-          {previewImage && (
-            <img className="uploaded-img" src={previewImage} alt="" />
-          )}
-          <div className="tweet-btn-container">
-            <label className="custom-file-upload">
-              <input onChange={previewFileChange} name="image" type="file" />
-              Upload Image
-            </label>
-            <button type="submit">Tweet</button>
-          </div>
-        </div>
-      </form>
+        </form>
+      )}
     </div>
   );
 };

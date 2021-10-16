@@ -3,6 +3,7 @@ import { validationResult } from "express-validator";
 import { createBrotliCompress } from "zlib";
 const Tweet = require("../models/tweet");
 const User = require("../models/user");
+
 exports.getTweets = async (req: any, res: Response, next: NextFunction) => {
   const tweetData = await Tweet.find();
   res.status(200).json(tweetData);

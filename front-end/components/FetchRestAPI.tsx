@@ -57,54 +57,7 @@ const FetchRestAPI: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <div className="feed-container">
-        <div className="tweets-feed">
-          <div>
-            {tweets &&
-              tweets.map((val: any, idx: number) => {
-                return (
-                  <div key={idx} className="tweet-container">
-                    <div className="tweet-header">
-                      {editContent === val._id ? (
-                        <div>
-                          <form action="sumbit" onSubmit={editTweetHandler}>
-                            <input type="hidden" value={val._id} />
-                            <textarea
-                              className="tweet-box edit-box"
-                              name="content"
-                              defaultValue={val.content}
-                            />
-                            <button type="submit">Complete</button>
-                          </form>
-                        </div>
-                      ) : (
-                        <p className="tweet-content">{val.content}</p>
-                      )}
-                      <div>
-                        <form action="sumbit" onSubmit={deleteTweetHandler}>
-                          <input type="hidden" value={val._id} />
-
-                          <button type="submit">Delete</button>
-                        </form>
-                        <input type="hidden" value={val._id} />
-
-                        <button onClick={() => setEditContent(val._id)}>
-                          Edit
-                        </button>
-                      </div>
-                    </div>
-
-                    <img
-                      className="uploaded-img"
-                      src={`http://localhost:8080/${val.imageUrl.substring(5)}`}
-                      alt=""
-                    />
-                  </div>
-                );
-              })}
-          </div>
-        </div>
-      </div>
+      <div className="feed-container"></div>
     </div>
   );
 };

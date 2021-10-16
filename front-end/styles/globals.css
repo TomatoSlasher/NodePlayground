@@ -23,6 +23,7 @@ label {
 .uploaded-img {
   width: 100%;
   border-radius: 10px;
+  border: 1px solid white;
 }
 .wrapper {
   display: flex;
@@ -37,14 +38,14 @@ label {
   /* padding: 1rem; */
 }
 .tweet-form {
-  border-top: 1px solid grey;
+  border: 1px solid grey;
   border-bottom: 1px solid grey;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 .tweet-box {
   padding: 0.3rem;
   border-radius: 10px;
-  width: 39rem;
+  width: 100%;
   height: 5rem;
   background-color: #1b2633;
   margin: 1rem 0rem;
@@ -82,4 +83,7 @@ button,
 }
 input[type="file"] {
   display: none;
+}
+.tweets-feed {
+  border: 1px solid grey;
 }

@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ProfileInfo from "./ProfileInfo";
+import TweetForm from "./TweetForm";
+import ProfileFeed from "./ProfileFeed";
+
+import classes from "./Profile.module.css";
 const Profile: React.FC = () => {
   const router: any = useRouter();
   const [profileData, setProfileData]: any = useState("");
@@ -17,11 +21,18 @@ const Profile: React.FC = () => {
       );
 
       const profileResult = await fetchProfile.json();
-      console.log(profileResult);
       setProfileData(profileResult);
     };
     getProfile();
   }, [router]);
-  return <div>{profileData.data && <ProfileInfo profile={profileData} />}</div>;
+  return (
+    <div className="wrapper">
+      <div className={classes["profile-page-container"]}>
+        {profileData.data && <ProfileInfo profile={profileData} />}
+        {profileData.data && <TweetForm profile={profileData} />}
+        {profileData.data && <ProfileFeed profile={profileData} />}
+      </div>
+    </div>
+  );
 };
 export default Profile;
