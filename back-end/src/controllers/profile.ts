@@ -59,10 +59,10 @@ exports.getProfile = async (req: any, res: Response, next: NextFunction) => {
     throw error;
   }
   const username = req.params.profileName;
-  const userData = await User.findOne(
-    { username: username },
-    { password: 0 }
-  ).populate("tweets");
+  const userData = await User.findOne({ username: username }, { password: 0 })
+    .populate("tweets")
+    .populate({ path: "following", select: "-password" })
+    .populate({ path: "followers", select: "-password" });
   if (!userData) {
     return res.status(200).json({
       message: "user not found",

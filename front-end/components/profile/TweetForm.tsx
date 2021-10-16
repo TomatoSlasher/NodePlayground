@@ -5,6 +5,7 @@ const TweetForm: React.FC<{
 }> = (props) => {
   const [isUserProfile, setIsUserProfile] = useState(false);
   useEffect(() => {
+    console.log(props.profile.userId);
     if (props.profile.userId === props.profile.data._id) {
       setIsUserProfile(true);
     }

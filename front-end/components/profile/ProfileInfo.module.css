@@ -17,9 +17,13 @@
 
 .following {
   display: flex;
+  margin-top: 0.5rem;
 }
 .following p {
-  padding-right: 1rem;
+  cursor: pointer;
+}
+.following p {
+  margin-right: 1rem;
   font-weight: bold;
   font-size: 18px;
 }
