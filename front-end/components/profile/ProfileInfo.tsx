@@ -14,6 +14,8 @@ interface ProfileType {
 const Profile: React.FC<{
   profile: { data: ProfileType; userId: string };
 }> = (props) => {
+  document.body.style.overflow = "auto";
+
   const profile = props.profile.data;
   const [isFollower, setIsFollower] = useState(false);
   const popupState = useSelector((state: any) => {

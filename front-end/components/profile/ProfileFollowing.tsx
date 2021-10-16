@@ -4,17 +4,24 @@ import { useDispatch } from "react-redux";
 import { popupActions } from "../../store/index";
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 const ProfileFollowing: React.FC<{ following: []; title: string }> = (
   props
 ) => {
+  const followingOverlay = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const closePopup = () => {
     dispatch(popupActions.popupState(""));
   };
+  document.onclick = (e: any) => {
+    if (e.target == followingOverlay.current) {
+      closePopup();
+    }
+  };
   document.body.style.overflow = "hidden";
   return (
-    <div className={classes["overlay"]}>
+    <div ref={followingOverlay} className={classes["overlay"]}>
       <div className={classes["following-container"]}>
         <div className={classes["following-header"]}>
           <h2>{props.title}</h2>
