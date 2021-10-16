@@ -8,9 +8,9 @@ interface ProfileType {
   following: [];
   _id: string;
 }
-const Profile: React.FC<{ profile: { data: ProfileType; userId: string } }> = (
-  props
-) => {
+const Profile: React.FC<{
+  profile: { data: ProfileType; userId: string };
+}> = (props) => {
   const profile = props.profile.data;
   const [isFollower, setIsFollower] = useState(false);
   // check if user follows profile
@@ -65,18 +65,22 @@ const Profile: React.FC<{ profile: { data: ProfileType; userId: string } }> = (
             <p>following {profile.following.length}</p>
             <p>followers {profile.followers.length}</p>
           </div>
-          {isFollower ? (
-            <form action="sumbit" onSubmit={profileUnfollowHandler}>
-              <input name="profileId" type="hidden" value={profile._id} />
-              <button className={classes["unfollow-btn"]} type="submit">
-                Unfollow
-              </button>
-            </form>
-          ) : (
-            <form action="sumbit" onSubmit={profileFollowHandler}>
-              <input name="profileId" type="hidden" value={profile._id} />
-              <button type="submit">Follow</button>
-            </form>
+          {props.profile.userId !== profile._id && (
+            <>
+              {isFollower ? (
+                <form action="sumbit" onSubmit={profileUnfollowHandler}>
+                  <input name="profileId" type="hidden" value={profile._id} />
+                  <button className={classes["unfollow-btn"]} type="submit">
+                    Unfollow
+                  </button>
+                </form>
+              ) : (
+                <form action="sumbit" onSubmit={profileFollowHandler}>
+                  <input name="profileId" type="hidden" value={profile._id} />
+                  <button type="submit">Follow</button>
+                </form>
+              )}
+            </>
           )}
         </div>
       </div>

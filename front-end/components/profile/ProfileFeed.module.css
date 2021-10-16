@@ -13,3 +13,31 @@
   border-radius: 100%;
   border: 1px solid grey;
 }
+.edit-tweet-container {
+  position: relative;
+}
+.edit-tweet-icon {
+  cursor: pointer;
+  margin: 0rem 0.5rem;
+  padding: 0.2rem;
+  border-radius: 10px;
+}
+.edit-tweet-icon:hover {
+  background-color: rgba(206, 206, 206, 0.082);
+}
+.tweet-menu-btn {
+  all: unset;
+  padding: 0.4rem 0.4rem;
+  /* border-bottom: 1px solid grey; */
+  width: 5rem;
+  cursor: pointer;
+}
+.tweet-menu-btn:hover {
+  background-color: rgba(206, 206, 206, 0.082);
+}
+.edit-tweet-menu {
+  position: absolute;
+  border-radius: 10px;
+  border: 1px solid grey;
+  background-color: #1d2733;
+}

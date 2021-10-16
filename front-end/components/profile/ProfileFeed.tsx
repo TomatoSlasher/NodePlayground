@@ -7,6 +7,7 @@ const ProfileFeed: React.FC<{
 }> = (props) => {
   const profile: any = props.profile.data;
   const [editContent, setEditContent] = useState("");
+  const [showEditMenu, setShowEditMenu] = useState("");
   const deleteTweetHandler = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
@@ -45,7 +46,8 @@ const ProfileFeed: React.FC<{
   };
   let profileTweets: any = [...profile.tweets];
   profileTweets.reverse();
-  console.log(profile);
+  console.log(profile._id);
+  console.log(props.profile.userId);
 
   return (
     <div className="tweets-feed">
@@ -81,16 +83,53 @@ const ProfileFeed: React.FC<{
                     </div>
                   </div>
                 )}
-                <div>
-                  <form action="sumbit" onSubmit={deleteTweetHandler}>
-                    <input type="hidden" value={val._id} />
+                {props.profile.userId === profile._id && (
+                  <div className={classes["edit-tweet-container"]}>
+                    <svg
+                      className={classes["edit-tweet-icon"]}
+                      width="30"
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="ellipsis-h"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      onClick={() => {
+                        showEditMenu === val._id
+                          ? setShowEditMenu("")
+                          : setShowEditMenu(val._id);
+                      }}
+                    >
+                      <path
+                        fill="rgb(0, 140, 255)"
+                        d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"
+                      ></path>
+                    </svg>
+                    {showEditMenu === val._id && (
+                      <div className={classes["edit-tweet-menu"]}>
+                        <form action="sumbit" onSubmit={deleteTweetHandler}>
+                          <input type="hidden" value={val._id} />
 
-                    <button type="submit">Delete</button>
-                  </form>
-                  <input type="hidden" value={val._id} />
+                          <button
+                            className={classes["tweet-menu-btn"]}
+                            type="submit"
+                          >
+                            Delete
+                          </button>
+                        </form>
+                        <input type="hidden" value={val._id} />
 
-                  <button onClick={() => setEditContent(val._id)}>Edit</button>
-                </div>
+                        <button
+                          className={classes["tweet-menu-btn"]}
+                          onClick={() => setEditContent(val._id)}
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               <img
