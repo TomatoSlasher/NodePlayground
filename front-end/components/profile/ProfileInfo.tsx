@@ -19,9 +19,8 @@ const Profile: React.FC<{
   const profile = props.profile.data;
   const [isFollower, setIsFollower] = useState(false);
   const popupState = useSelector((state: any) => {
-    return state.popup;
+    return state.popup.popup;
   });
-  console.log(popupState);
   const dispatch = useDispatch();
   // check if user follows profile
   useEffect(() => {

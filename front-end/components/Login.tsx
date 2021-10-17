@@ -1,7 +1,10 @@
 import { useRouter } from "next/router";
-
+import { loginActions } from "../store/index";
+import { useDispatch } from "react-redux";
 const Login = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const postLogin = async (e: any) => {
     e.preventDefault();
     const formData: any = new FormData();
@@ -12,14 +15,17 @@ const Login = () => {
     const fetchRest = await fetch("http://localhost:8080/user/login", {
       method: "POST",
       body: formData,
-      // headers: {
-      //   Auth,
-      // },
     });
     const fetchResult = await fetchRest.json();
-    console.log(fetchResult);
+    dispatch(
+      loginActions.loginState({
+        userId: fetchResult.userId,
+        username: fetchResult.username,
+      })
+    );
+
     localStorage.setItem("token", fetchResult.token);
-    router.push("/");
+    // router.push("/");
   };
   return (
     <div className="wrapper">

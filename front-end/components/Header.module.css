@@ -13,3 +13,9 @@
   color: #008cff;
   border: 1px solid #008cff;
 }
+.user-header {
+  display: flex;
+}
+.user-header h2 {
+  margin-right: 1rem;
+}

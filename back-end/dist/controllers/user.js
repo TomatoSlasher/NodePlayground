@@ -44,6 +44,7 @@ exports.loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         return res.status(200).json({
             token: token,
             userId: userEmail._id.toString(),
+            username: userEmail.username,
         });
     }
 });

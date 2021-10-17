@@ -58,7 +58,10 @@ const ProfileFollowing: React.FC<{ following: []; title: string }> = (
                     alt="user default image"
                   />
                   <Link href={`/${val.username}`}>
-                    <h3 className={classes["list-username"]}>
+                    <h3
+                      onClick={closePopup}
+                      className={classes["list-username"]}
+                    >
                       @{val.username}
                     </h3>
                   </Link>

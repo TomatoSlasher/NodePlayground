@@ -45,6 +45,7 @@ exports.loginUser = async (req: any, res: Response, next: NextFunction) => {
     return res.status(200).json({
       token: token,
       userId: userEmail._id.toString(),
+      username: userEmail.username,
     });
   }
 };
