@@ -18,15 +18,16 @@ const HomeFeed = () => {
         },
       });
       const fetchResult = await fetchRest.json();
-      //etract tweets from following objec
+      //etract tweets from following object
       const followingTweets = fetchResult.followingTweets.following;
-
-      followingTweets.map((val: any) =>
-        userFollowingTweets.push(...val.tweets)
-      );
+      const arr: any = [];
+      followingTweets.map((val: any) => {
+        return arr.push(...val.tweets);
+      });
+      console.log(arr);
+      setUserFollowingTweets(arr);
     };
     getTweets();
-    console.log(userFollowingTweets);
   }, []);
   return (
     <div className="wrapper">

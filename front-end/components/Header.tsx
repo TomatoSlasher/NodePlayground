@@ -7,9 +7,7 @@ const Header = () => {
   const loginState = useSelector((state: any) => {
     return state.login;
   });
-  useEffect(() => {
-    console.log(loginState);
-  }, [loginState]);
+
   return (
     <div className={classes["header-container"]}>
       <Link href="/">
