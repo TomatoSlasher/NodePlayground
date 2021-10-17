@@ -25,7 +25,7 @@ const Login = () => {
     );
 
     localStorage.setItem("token", fetchResult.token);
-    // router.push("/");
+    router.push("/");
   };
   return (
     <div className="wrapper">

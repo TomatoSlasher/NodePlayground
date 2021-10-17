@@ -1,6 +1,7 @@
 []- change mongoDB user password (already in commit history)
 [x]- user follwers & following
-[]- user follwers & following list
+[x]- user follwers & following list
+[x]- user logout
 []- tweets comments and likes
 []- home feed for followed accounts
 []- user profile images

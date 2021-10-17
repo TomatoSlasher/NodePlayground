@@ -12,7 +12,9 @@ const Header = () => {
   }, [loginState]);
   return (
     <div className={classes["header-container"]}>
-      <h1>Twitter Clone</h1>
+      <Link href="/">
+        <h1>Twitter Clone</h1>
+      </Link>
       <div>
         {!loginState.userId && (
           <>
@@ -26,7 +28,9 @@ const Header = () => {
         )}
         {loginState.userId && (
           <div className={classes["user-header"]}>
-            <h2>@{loginState.username}</h2>
+            <Link href={`/${loginState.username}`}>
+              <h2>@{loginState.username}</h2>
+            </Link>
             <Logout />
           </div>
         )}

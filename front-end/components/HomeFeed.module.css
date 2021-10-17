@@ -1,0 +1,23 @@
+.feed-container {
+  width: 60vw;
+}
+.tweet-container {
+  border: 1px solid grey;
+  padding: 0.5rem;
+}
+.tweet-header-container {
+  display: flex;
+}
+.tweet-content-container {
+  margin: 0rem 0.5rem;
+}
+.tweet-username {
+  color: rgb(211, 211, 211);
+  font-weight: bold;
+  cursor: pointer;
+}
+.tweet-profile-img {
+  width: 4rem;
+  border-radius: 100%;
+  border: 1px solid grey;
+}

@@ -13,8 +13,20 @@ const express_validator_1 = require("express-validator");
 const Tweet = require("../models/tweet");
 const User = require("../models/user");
 exports.getTweets = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const tweetData = yield Tweet.find();
-    res.status(200).json(tweetData);
+    const tweetData = yield User.findById(req.userId)
+        .select("following")
+        .populate({
+        path: "following",
+        select: "tweets",
+        populate: {
+            path: "tweets",
+            populate: {
+                path: "creator",
+                select: "username",
+            },
+        },
+    });
+    res.status(200).json({ message: "all tweets", followingTweets: tweetData });
 });
 exports.deleteTweet = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const tweet = yield Tweet.findById(req.body.id);

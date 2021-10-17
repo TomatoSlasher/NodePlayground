@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import FetchRestAPI from "../components/FetchRestAPI";
+import HomeFeed from "../components/HomeFeed";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <FetchRestAPI />
+      <HomeFeed />
     </div>
   );
 };

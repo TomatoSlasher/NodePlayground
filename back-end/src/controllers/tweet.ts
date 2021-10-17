@@ -5,8 +5,21 @@ const Tweet = require("../models/tweet");
 const User = require("../models/user");
 
 exports.getTweets = async (req: any, res: Response, next: NextFunction) => {
-  const tweetData = await Tweet.find();
-  res.status(200).json(tweetData);
+  const tweetData = await User.findById(req.userId)
+    .select("following")
+    .populate({
+      path: "following",
+      select: "tweets",
+      populate: {
+        path: "tweets",
+        populate: {
+          path: "creator",
+          select: "username",
+        },
+      },
+    });
+
+  res.status(200).json({ message: "all tweets", followingTweets: tweetData });
 };
 exports.deleteTweet = async (req: any, res: Response, next: NextFunction) => {
   const tweet = await Tweet.findById(req.body.id);

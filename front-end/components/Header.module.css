@@ -5,6 +5,9 @@
   padding: 0.5rem;
   border-bottom: 1px solid grey;
 }
+.header-container h1 {
+  cursor: pointer;
+}
 .header-container button {
   margin: 0rem 0.5rem;
 }
@@ -18,4 +21,5 @@
 }
 .user-header h2 {
   margin-right: 1rem;
+  cursor: pointer;
 }
