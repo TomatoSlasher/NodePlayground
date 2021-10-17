@@ -3,6 +3,6 @@
 [x]- user follwers & following list
 [x]- user logout
 []- tweets comments and likes
-[]- home feed for followed accounts
+[x]- home feed for followed accounts
 []- user profile images
 

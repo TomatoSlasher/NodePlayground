@@ -66,7 +66,6 @@ const ProfileFollowing: React.FC<{ following: []; title: string }> = (
                     </h3>
                   </Link>
                 </div>
-                <button>Follow</button>
               </div>
             );
           })}
