@@ -44,6 +44,6 @@ app.use("/tweet", tweet_1.default);
 app.use("/user", user_1.default);
 app.use("/profile", profile_1.default);
 mongoose_1.default
-    .connect("mongodb+srv://tomato:ms4680SXk0j12JG6@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    .then((res) => app.listen(8080))
+    .connect(`mongodb+srv://tomato:${process.env.MONGO_PASSWORD}@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
+    .then((res) => app.listen(process.env.PORT || 8080))
     .catch((err) => console.log(err));

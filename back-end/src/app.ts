@@ -2,10 +2,13 @@ import express from "express";
 import feed from "./routes/tweet";
 import user from "./routes/user";
 import profile from "./routes/profile";
+import helmet from "helmet";
 
 import mongoose, { CallbackWithoutResult } from "mongoose";
 import path from "path";
 import multer from "multer";
+const compression = require("compression");
+
 const { v4: uuidv4 } = require("uuid");
 
 const bodyParser = require("body-parser");
@@ -34,6 +37,8 @@ const fileFilter = (
   }
 };
 app.use(bodyParser.json());
+app.use(helmet());
+app.use(compression());
 
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
@@ -56,8 +61,8 @@ app.use("/profile", profile);
 
 mongoose
   .connect(
-    "mongodb+srv://tomato:ms4680SXk0j12JG6@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    `mongodb+srv://tomato:${process.env.MONGO_PASSWORD}@cluster0.z1y59.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
   )
-  .then((res) => app.listen(8080))
+  .then((res) => app.listen(process.env.PORT || 8080))
 
   .catch((err) => console.log(err));

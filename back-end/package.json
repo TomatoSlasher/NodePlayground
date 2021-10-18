@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
+  "engines": {
+    "node": "14.16.0"
+  },
   "scripts": {
     "start": "concurrently \"tsc --watch\" \"nodemon -q dist/app.js\""
   },
@@ -12,10 +15,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
     "cross-env": "^7.0.3",
     "csurf": "^1.11.0",
     "express": "^4.17.1",
     "express-validator": "^6.12.2",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.9",
     "multer": "^1.4.3",

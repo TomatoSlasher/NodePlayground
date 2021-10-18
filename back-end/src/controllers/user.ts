@@ -39,7 +39,7 @@ exports.loginUser = async (req: any, res: Response, next: NextFunction) => {
         email: userEmail.email,
         userId: userEmail._id.toString(),
       },
-      "supersecret",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
     return res.status(200).json({

@@ -40,7 +40,7 @@ exports.loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         const token = jwt.sign({
             email: userEmail.email,
             userId: userEmail._id.toString(),
-        }, "supersecret", { expiresIn: "1h" });
+        }, process.env.JWT_SECRET, { expiresIn: "1h" });
         return res.status(200).json({
             token: token,
             userId: userEmail._id.toString(),
