@@ -14,13 +14,16 @@ const ProfileFeed: React.FC<{
     const token = localStorage.getItem("token");
 
     formData.append("id", e.target[0].value);
-    const fetchRest = await fetch("http://localhost:8080/tweet/delete", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/tweet/delete",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     const restData2 = await fetchRest.json();
     console.log(restData2);
   };
@@ -32,13 +35,16 @@ const ProfileFeed: React.FC<{
     formData.append("id", e.target[0].value);
     formData.append("content", e.target[1].value);
 
-    const fetchRest = await fetch("http://localhost:8080/tweet/edit", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/tweet/edit",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     const restData2 = await fetchRest.json();
     console.log(restData2);
 
@@ -134,7 +140,9 @@ const ProfileFeed: React.FC<{
 
               <img
                 className="uploaded-img"
-                src={`http://localhost:8080/${val.imageUrl.substring(5)}`}
+                src={`https://twitter-tomato.herokuapp.com/${val.imageUrl.substring(
+                  5
+                )}`}
                 alt=""
               />
             </div>

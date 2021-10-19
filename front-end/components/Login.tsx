@@ -12,10 +12,13 @@ const Login = () => {
 
     formData.append("password", e.target[1].value);
 
-    const fetchRest = await fetch("http://localhost:8080/user/login", {
-      method: "POST",
-      body: formData,
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/user/login",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const fetchResult = await fetchRest.json();
     dispatch(
       loginActions.loginState({
@@ -35,7 +38,7 @@ const Login = () => {
         <label htmlFor="password">Passowrd</label>
         <input type="password" name="password" />
         <div>
-          <button type="submit">Login</button>
+          <button type="submit">Login2</button>
         </div>
       </form>
     </div>

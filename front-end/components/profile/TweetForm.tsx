@@ -17,12 +17,15 @@ const TweetForm: React.FC<{
     const formData: any = new FormData();
     formData.append("image", e.target.files[0]);
 
-    const fetchRest = await fetch("http://localhost:8080/tweet/img-preview", {
-      method: "POST",
-      body: formData,
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/tweet/img-preview",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const fetchResult: any = await fetchRest.json();
-    const imgPath = `http://localhost:8080/${fetchResult.imageUrl.substring(
+    const imgPath = `https://twitter-tomato.herokuapp.com/${fetchResult.imageUrl.substring(
       5
     )}`;
     setPreviewImage(imgPath);
@@ -35,13 +38,16 @@ const TweetForm: React.FC<{
 
     formData.append("content", e.target[0].value);
 
-    const fetchRest = await fetch("http://localhost:8080/tweet/create", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/tweet/create",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     const fetchResult = await fetchRest.json();
     setPreviewImage("");
     setPostState(!postState);

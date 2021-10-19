@@ -38,13 +38,16 @@ const Profile: React.FC<{
     const formData: any = new FormData();
     formData.append("profileId", e.target[0].value);
 
-    const fetchRest = await fetch("http://localhost:8080/profile/follow", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/profile/follow",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     const restData2 = await fetchRest.json();
   };
   const profileUnfollowHandler = async (e: any) => {
@@ -53,13 +56,16 @@ const Profile: React.FC<{
     const formData: any = new FormData();
     formData.append("profileId", e.target[0].value);
 
-    const fetchRest = await fetch("http://localhost:8080/profile/unfollow", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/profile/unfollow",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     const restData2 = await fetchRest.json();
     console.log(restData2);
   };

@@ -12,11 +12,14 @@ const HomeFeed = () => {
     const getTweets = async () => {
       const token = localStorage.getItem("token");
 
-      const fetchRest = await fetch("http://localhost:8080/tweet/all", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const fetchRest = await fetch(
+        "https://twitter-tomato.herokuapp.com/tweet/all",
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
       const fetchResult = await fetchRest.json();
       //etract tweets from following object
       const followingTweets = fetchResult.followingTweets.following;
@@ -60,7 +63,9 @@ const HomeFeed = () => {
 
                     <img
                       className="uploaded-img"
-                      src={`http://localhost:8080/${val.imageUrl.substring(5)}`}
+                      src={`https://twitter-tomato.herokuapp.com/${val.imageUrl.substring(
+                        5
+                      )}`}
                       alt=""
                     />
                   </div>

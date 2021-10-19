@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
     const getProfile = async () => {
       const token = localStorage.getItem("token");
       const fetchProfile = await fetch(
-        `http://localhost:8080/profile/view/${router.query.profile}`,
+        `https://twitter-tomato.herokuapp.com/profile/view/${router.query.profile}`,
         {
           headers: {
             Authorization: "Bearer " + token,

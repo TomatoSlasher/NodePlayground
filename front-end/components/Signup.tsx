@@ -12,10 +12,13 @@ const Signup = () => {
 
     formData.append("password", e.target[2].value);
 
-    const fetchRest = await fetch("http://localhost:8080/user/signup", {
-      method: "POST",
-      body: formData,
-    });
+    const fetchRest = await fetch(
+      "https://twitter-tomato.herokuapp.com/user/signup",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const fetchResult = await fetchRest.json();
     console.log(fetchResult);
     router.push("/login");
