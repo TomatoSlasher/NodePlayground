@@ -7,9 +7,11 @@ const express_1 = __importDefault(require("express"));
 const tweet_1 = __importDefault(require("./routes/tweet"));
 const user_1 = __importDefault(require("./routes/user"));
 const profile_1 = __importDefault(require("./routes/profile"));
+const helmet_1 = __importDefault(require("helmet"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const path_1 = __importDefault(require("path"));
 const multer_1 = __importDefault(require("multer"));
+const compression = require("compression");
 const { v4: uuidv4 } = require("uuid");
 const bodyParser = require("body-parser");
 const app = (0, express_1.default)();
@@ -32,6 +34,8 @@ const fileFilter = (req, file, cb) => {
     }
 };
 app.use(bodyParser.json());
+app.use((0, helmet_1.default)());
+app.use(compression());
 app.use((0, multer_1.default)({ storage: fileStorage, fileFilter: fileFilter }).single("image"));
 app.use("/images", express_1.default.static(path_1.default.join(__dirname, "images")));
 app.use((req, res, next) => {
